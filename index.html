@@ -51,9 +51,12 @@
     cursor: pointer;
     font-size: 1.1em;
     transition: 0.3s;
+    margin-top: 10px;
   }
   button:hover { transform: scale(1.05); }
   .start-screen h2 { font-size: 1.8em; margin-bottom: 20px; }
+  .extra-text { display: none; margin-top: 15px; font-size: 1.1em; }
+  .extra-text.show { display: block; animation: fadeIn 1s ease; }
 </style>
 </head>
 <body>
@@ -66,21 +69,41 @@
 <div class="card" id="card">
   <h1>Happy Birthday Sayang 🎂</h1>
   <p>Maaf aku gak bisa dateng besok. Tapi gak ada hari pun yang bikin aku berhenti sayang sama kamu.</p>
-  <img src="foto-dia.jpg" alt="Foto dia">
-  <p>Semoga semua yang kamu minta tahun ini dikabulin. Aku janji bakal ganti semua ini pas ada rejeki. Aku sayang kamu ❤️</p>
+  <img src="IMG-20260404-WA0042.jpg" alt="Foto dia">
+  <p>Semoga semua yang kamu minta tahun ini dikabulin. Aku janji bakal ganti semua ini pas ada rejeki.</p>
+  
+  <p class="extra-text" id="text1">Aku sayang kamu ❤️</p>
+  <p class="extra-text" id="text2">Makasih udah ngerti keadaan aku ya...</p>
+  
+  <button id="btnLanjut" onclick="lanjut()">Pencet Ini</button>
+  <button id="btnWA" style="display:none; background:#25D366; color:#fff;" onclick="window.open('https://wa.me/62895351432524')">Balas ke WA Aku</button>
 </div>
 
 <audio id="lagu" loop>
-  <source src="happy-birthday.mp3" type="audio/mpeg">
+  <source src="Lagu_Anak_Terpopuler_Dan_Terbaru.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+let step = 0;
 function playMusic() {
   document.getElementById('start').style.display = 'none';
   document.getElementById('card').classList.add('show');
-  document.getElementById('lagu').play();
+  document.getElementById('lagu').play().catch(()=>{});
+}
+
+function lanjut() {
+  step++;
+  if(step === 1) {
+    document.getElementById('text1').classList.add('show');
+    document.getElementById('btnLanjut').innerText = 'Pencet Lagi';
+  }
+  if(step === 2) {
+    document.getElementById('text2').classList.add('show');
+    document.getElementById('btnLanjut').style.display = 'none';
+    document.getElementById('btnWA').style.display = 'inline-block';
+  }
 }
 </script>
 
 </body>
-  </html>
+</html>
