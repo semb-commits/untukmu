@@ -80,7 +80,7 @@
 </div>
 
 <audio id="lagu" loop>
-  <source src="Lagu_Anak_Terpopuler_Dan_Terbaru.mp3" type="audio/mpeg">
+  <source src="happy%20birthday.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -88,7 +88,9 @@ let step = 0;
 function playMusic() {
   document.getElementById('start').style.display = 'none';
   document.getElementById('card').classList.add('show');
-  document.getElementById('lagu').play().catch(()=>{});
+  document.getElementById('lagu').play().catch(err => {
+    alert("Lagu gagal play. Refresh terus klik Buka lagi ya");
+  });
 }
 
 function lanjut() {
@@ -106,4 +108,4 @@ function lanjut() {
 </script>
 
 </body>
-</html>
+     </html>
