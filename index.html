@@ -3,14 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Sayang</title>
+<title>Semangat Buat Kamu</title>
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 <style>
     * { margin:0; padding:0; box-sizing: border-box; }
+  
   body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+    background: linear-gradient(135deg, #667eea, #764ba2, #6B8DD6);
     background-size: 400% 400%;
-    animation: gradient 8s ease infinite;
+    animation: gradient 10s ease infinite;
     color: #fff;
     text-align: center;
     min-height: 100vh;
@@ -19,105 +25,154 @@
     justify-content: center;
     padding: 20px;
   }
+  
   @keyframes gradient {
     0% {background-position: 0% 50%;}
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
   }
+  
   .card {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
     padding: 40px 30px;
     border-radius: 25px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    max-width: 450px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    max-width: 500px;
     display: none;
+    border: 1px solid rgba(255,255,255,0.2);
   }
-  .card.show { display: block; animation: fadeIn 1.5s ease; }
-  @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
+  
+  .card.show { display: block; }
+  
+  h1 { 
+    font-size: 2em; 
+    margin-bottom: 15px; 
+    font-weight: 700;
   }
-  h1 { font-size: 2.2em; margin-bottom: 15px; }
-  p { font-size: 1.1em; margin-bottom: 18px; line-height: 1.7; }
-  img { 
+  
+  p { 
+    font-size: 1.1em; 
+    margin-bottom: 18px; 
+    line-height: 1.8; 
+    font-weight: 400;
+  }
+  
+  video { 
     width: 220px; 
     height: 220px; 
-    object-fit: cover; 
-    border-radius: 50%; 
+    object-fit: contain; 
+    border-radius: 20px; 
     margin: 20px 0; 
-    border: 4px solid #fff; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: transparent;
   }
+  
   button {
     padding: 14px 35px;
     border: none;
     border-radius: 50px;
     background: #fff;
-    color: #ff6b81;
+    color: #667eea;
     font-weight: bold;
     cursor: pointer;
     font-size: 1.1em;
     transition: 0.3s;
     margin-top: 10px;
   }
-  button:hover { transform: scale(1.05); }
-  .start-screen h2 { font-size: 1.8em; margin-bottom: 20px; }
-  .extra-text { display: none; margin-top: 15px; font-size: 1.1em; }
-  .extra-text.show { display: block; animation: fadeIn 1s ease; }
+  
+  button:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+  
+  .start-screen h2 { 
+    font-size: 1.8em; 
+    margin-bottom: 20px; 
+    font-weight: 600;
+  }
+  
+  .extra-text { 
+    display: none; 
+    margin-top: 15px; 
+  }
+  
+  .extra-text.show { display: block; }
 </style>
 </head>
 <body>
 
-<div class="start-screen" id="start">
-  <h2>Ketuk buat buka ucapan 🎁</h2>
-  <button onclick="playMusic()">Buka</button>
+<div class="start-screen" id="start" data-aos="fade-down" data-aos-duration="1000">
+  <h2>Ketuk buat buka semangatnya 🔥</h2>
+  <button onclick="playContent()">Buka</button>
 </div>
 
 <div class="card" id="card">
-  <h1>Happy Birthday Sayangku 🎂</h1>
-  <p>Maaf aku gak bisa ada di samping kamu hari ini. Rasanya aneh banget ngerayain hari spesial kamu tanpa bisa liat senyum kamu langsung.</p>
+  <h1 data-aos="fade-up" data-aos-duration="800">Kamu Kuat, Kamu Bisa 💪</h1>
   
-  <img src="IMG-20260404-WA0042.jpg" alt="Foto dia">
+  <p data-aos="fade-up" data-aos-delay="200">
+    Gue tau sekarang lagi berat. Rasanya pengen nyerah, rasanya semua gak jalan sesuai rencana.
+    Tapi dengerin gue, lu udah sejauh ini bukan karena kebetulan.
+  </p>
   
-  <p>Tapi inget ya, jarak gak pernah bisa ngurangin rasa sayang aku ke kamu. Malah tiap hari aku makin sadar, beruntung banget punya kamu di hidup aku.</p>
+  <video 
+    src="VID-20260604-WA6928.mp4" 
+    autoplay 
+    loop 
+    muted 
+    playsinline
+    data-aos="zoom-in" 
+    data-aos-delay="400">
+  </video>
   
-  <p>Semoga di umur yang baru ini, semua doa dan mimpi kamu satu-satu dikabulin. Semoga kamu selalu sehat, bahagia, dan tetep jadi versi terbaik dari diri kamu. Aku janji, nanti kalau ada rejeki aku bakal ganti semua ini dengan yang lebih dari cukup buat kamu.</p>
+  <p data-aos="fade-up" data-aos-delay="600">
+    Orang kuat itu bukan yang gak pernah jatuh. Tapi yang tiap kali jatuh, dia bangun lagi 
+    dengan kepala lebih tegak dan hati yang lebih keras.
+  </p>
   
-  <p class="extra-text" id="text1">Makasih udah sabar sama aku, udah ngerti keadaan aku. Kamu tuh orang terkuat yang pernah aku kenal ❤️</p>
-  <p class="extra-text" id="text2">Aku sayang kamu lebih dari kata-kata. Nanti kita rayain bareng ya, yang lebih spesial dari sekarang.</p>
+  <p class="extra-text" id="text1">
+    Jangan bandingin progress lu sama orang lain. Lu punya timeline sendiri. 
+    Pelan gak masalah, yang penting gak berhenti.
+  </p>
   
-  <button id="btnLanjut" onclick="lanjut()">Pencet Ini</button>
-  <button id="btnWA" style="display:none; background:#25D366; color:#fff;" onclick="window.open('https://wa.me/62895351432524')">Balas ke WA Aku</button>
+  <p class="extra-text" id="text2">
+    Hari ini mungkin capek banget. Tapi inget, versi lu 6 bulan lagi bakal makasih 
+    banget sama lu yang gak nyerah hari ini. Gue percaya sama lu.
+  </p>
+  
+  <button id="btnLanjut" onclick="lanjut()" data-aos="fade-up" data-aos-delay="800">Pencet Ini</button>
+  <button id="btnWA" style="display:none; background:#25D366; color:#fff;" onclick="window.open('https://wa.me/62895351432524')">
+    Chat Gue
+  </button>
 </div>
-
-<audio id="lagu" loop>
-  <source src="happy%20birthday.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 let step = 0;
-function playMusic() {
+
+// Init AOS
+AOS.init({
+  once: true,
+  offset: 50
+});
+
+function playContent() {
   document.getElementById('start').style.display = 'none';
   document.getElementById('card').classList.add('show');
-  document.getElementById('lagu').play().catch(err => {
-    alert("Lagu gagal play. Refresh terus klik Buka lagi ya");
-  });
 }
 
 function lanjut() {
   step++;
   if(step === 1) {
     document.getElementById('text1').classList.add('show');
+    document.getElementById('text1').setAttribute('data-aos', 'fade-up');
     document.getElementById('btnLanjut').innerText = 'Pencet Lagi';
+    AOS.refresh();
   }
   if(step === 2) {
     document.getElementById('text2').classList.add('show');
+    document.getElementById('text2').setAttribute('data-aos', 'fade-up');
     document.getElementById('btnLanjut').style.display = 'none';
     document.getElementById('btnWA').style.display = 'inline-block';
+    AOS.refresh();
   }
 }
 </script>
 
 </body>
-     </html>
+   </html>
