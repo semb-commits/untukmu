@@ -7,12 +7,13 @@
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 * { margin:0; padding:0; box-sizing: border-box; }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
   background: transparent;
   color: #fff;
   text-align: center;
@@ -28,35 +29,53 @@ body {
   display: none;
   width: 100%;
   max-width: 450px;
+  position: relative;
+  min-height: 500px;
 }
 
 .page.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 h1 {
   font-size: 2em;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-weight: 700;
-  text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+  text-shadow: 0 3px 20px rgba(0,0,0,0.6);
+  position: relative;
+  z-index: 2;
 }
 
 .typewriter {
-  font-size: 1.15em;
-  margin-bottom: 20px;
-  line-height: 1.8;
+  font-size: 1.1em;
+  line-height: 1.9;
   font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-  display: inline-block;
-  text-align: left;
+  text-shadow: 0 3px 15px rgba(0,0,0,0.7);
+  text-align: center;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  padding: 18px 20px;
+  border-radius: 18px;
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 video {
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: 240px;
   object-fit: contain;
-  border-radius: 20px;
-  margin: 20px 0;
   background: transparent;
 }
 
@@ -64,15 +83,17 @@ button {
   padding: 14px 40px;
   border: none;
   border-radius: 50px;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
   color: #ff6b81;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   font-size: 1.1em;
   transition: 0.3s;
-  margin-top: 20px;
+  margin-top: 15px;
   backdrop-filter: blur(10px);
   display: none;
+  position: relative;
+  z-index: 2;
 }
 
 button.show {
@@ -85,11 +106,13 @@ button:hover {
 }
 
 .tap-hint {
-  font-size: 0.9em;
-  opacity: 0.7;
-  margin-top: 30px;
+  font-size: 0.85em;
+  opacity: 0.8;
+  margin-top: 15px;
   animation: pulse 2s infinite;
   display: none;
+  position: relative;
+  z-index: 2;
 }
 
 .tap-hint.show {
@@ -97,8 +120,8 @@ button:hover {
 }
 
 @keyframes pulse {
- 0%, 100% { opacity: 0.7; }
- 50% { opacity: 0.3; }
+ 0%, 100% { opacity: 0.8; }
+ 50% { opacity: 0.4; }
 }
 
 .cursor {
@@ -127,17 +150,16 @@ button:hover {
 
 <!-- Halaman 2 -->
 <div class="page" id="page2" onclick="nextPage(2)">
+  <div class="video-wrapper">
+    <video
+      src="VID-20260604-WA6928.mp4"
+      autoplay
+      loop
+      muted
+      playsinline>
+    </video>
+  </div>
   <h1 data-aos="fade-down">Kamu Lucu Banget</h1>
-
-  <video
-    src="VID-20260604-WA6928.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    data-aos="zoom-in">
-  </video>
-
   <div class="typewriter" id="text2"></div>
   <div class="tap-hint" id="hint2">Ketuk lagi ya</div>
 </div>
@@ -155,6 +177,7 @@ button:hover {
 let currentPage = 1;
 const totalPages = 3;
 let isTyping = false;
+let typingInterval;
 
 const texts = {
  1: "Gue gak tau mulai dari mana, tapi tiap kali inget kamu, rasanya hari yang biasa aja jadi sedikit lebih terang. Boleh gak sih gue jujur? Dari dulu gue ngerasa ada yang beda setiap kali ngobrol sama kamu.",
@@ -175,34 +198,38 @@ window.onload = () => {
 }
 
 function typeWriter(page, text, elementId, callback) {
-  if (isTyping) return;
-  isTyping = true;
+  if (isTyping) {
+    clearInterval(typingInterval);
+    document.getElementById(elementId).innerHTML = text;
+    isTyping = false;
+    if (callback) callback();
+    return;
+  }
 
+  isTyping = true;
   let i = 0;
   const element = document.getElementById(elementId);
   element.innerHTML = '<span class="cursor"></span>';
 
-  const typing = setInterval(() => {
+  typingInterval = setInterval(() => {
     if (i < text.length) {
       element.innerHTML = text.substring(0, i+1) + '<span class="cursor"></span>';
       i++;
     } else {
-      clearInterval(typing);
+      clearInterval(typingInterval);
       element.innerHTML = text;
       isTyping = false;
       if (callback) callback();
     }
-  }, 45);
+  }, 40);
 }
 
 function nextPage(page) {
-  if (isTyping || page >= totalPages) return;
+  if (page >= totalPages) return;
 
   document.getElementById(`page${page}`).classList.remove('active');
-
   currentPage = page + 1;
   document.getElementById(`page${currentPage}`).classList.add('active');
-
   AOS.refresh();
 
   setTimeout(() => {
@@ -212,12 +239,19 @@ function nextPage(page) {
       } else {
         setTimeout(() => {
           document.getElementById('btnWA').classList.add('show');
-        }, 500);
+        }, 400);
       }
     });
-  }, 300);
+  }, 200);
 }
+
+// Tap buat skip typing
+document.addEventListener('click', (e) => {
+  if (isTyping &&!e.target.closest('button')) {
+    typeWriter(currentPage, texts[currentPage], `text${currentPage}`);
+  }
+});
 </script>
 
 </body>
-   </html>
+</html>
