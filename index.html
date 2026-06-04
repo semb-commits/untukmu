@@ -3,174 +3,219 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Semangat Buat Kamu</title>
+<title>Buat Kamu</title>
 
-<!-- AOS Animation -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <style>
-    * { margin:0; padding:0; box-sizing: border-box; }
-  
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2, #6B8DD6);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
-    color: #fff;
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  @keyframes gradient {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-  
-  .card {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(12px);
-    padding: 40px 30px;
-    border-radius: 25px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-    max-width: 500px;
-    display: none;
-    border: 1px solid rgba(255,255,255,0.2);
-  }
-  
-  .card.show { display: block; }
-  
-  h1 { 
-    font-size: 2em; 
-    margin-bottom: 15px; 
-    font-weight: 700;
-  }
-  
-  p { 
-    font-size: 1.1em; 
-    margin-bottom: 18px; 
-    line-height: 1.8; 
-    font-weight: 400;
-  }
-  
-  video { 
-    width: 220px; 
-    height: 220px; 
-    object-fit: contain; 
-    border-radius: 20px; 
-    margin: 20px 0; 
-    background: transparent;
-  }
-  
-  button {
-    padding: 14px 35px;
-    border: none;
-    border-radius: 50px;
-    background: #fff;
-    color: #667eea;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: 0.3s;
-    margin-top: 10px;
-  }
-  
-  button:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
-  
-  .start-screen h2 { 
-    font-size: 1.8em; 
-    margin-bottom: 20px; 
-    font-weight: 600;
-  }
-  
-  .extra-text { 
-    display: none; 
-    margin-top: 15px; 
-  }
-  
-  .extra-text.show { display: block; }
+* { margin:0; padding:0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: transparent;
+  color: #fff;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+  width: 100%;
+  max-width: 450px;
+}
+
+.page.active {
+  display: block;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+}
+
+.typewriter {
+  font-size: 1.15em;
+  margin-bottom: 20px;
+  line-height: 1.8;
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  display: inline-block;
+  text-align: left;
+}
+
+video {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 20px;
+  margin: 20px 0;
+  background: transparent;
+}
+
+button {
+  padding: 14px 40px;
+  border: none;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.9);
+  color: #ff6b81;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: 0.3s;
+  margin-top: 20px;
+  backdrop-filter: blur(10px);
+  display: none;
+}
+
+button.show {
+  display: inline-block;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #fff;
+}
+
+.tap-hint {
+  font-size: 0.9em;
+  opacity: 0.7;
+  margin-top: 30px;
+  animation: pulse 2s infinite;
+  display: none;
+}
+
+.tap-hint.show {
+  display: block;
+}
+
+@keyframes pulse {
+ 0%, 100% { opacity: 0.7; }
+ 50% { opacity: 0.3; }
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: #fff;
+  animation: blink 0.7s infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+ 0%, 50% { opacity: 1; }
+ 51%, 100% { opacity: 0; }
+}
 </style>
 </head>
 <body>
 
-<div class="start-screen" id="start" data-aos="fade-down" data-aos-duration="1000">
-  <h2>Ketuk buat buka semangatnya 🔥</h2>
-  <button onclick="playContent()">Buka</button>
+<!-- Halaman 1 -->
+<div class="page active" id="page1" onclick="nextPage(1)">
+  <h1 data-aos="fade-down">Hai Kamu...</h1>
+  <div class="typewriter" id="text1"></div>
+  <div class="tap-hint" id="hint1">Ketuk buat lanjut</div>
 </div>
 
-<div class="card" id="card">
-  <h1 data-aos="fade-up" data-aos-duration="800">Kamu Kuat, Kamu Bisa 💪</h1>
-  
-  <p data-aos="fade-up" data-aos-delay="200">
-    Gue tau sekarang lagi berat. Rasanya pengen nyerah, rasanya semua gak jalan sesuai rencana.
-    Tapi dengerin gue, lu udah sejauh ini bukan karena kebetulan.
-  </p>
-  
-  <video 
-    src="VID-20260604-WA6928.mp4" 
-    autoplay 
-    loop 
-    muted 
+<!-- Halaman 2 -->
+<div class="page" id="page2" onclick="nextPage(2)">
+  <h1 data-aos="fade-down">Kamu Lucu Banget</h1>
+
+  <video
+    src="VID-20260604-WA6928.mp4"
+    autoplay
+    loop
+    muted
     playsinline
-    data-aos="zoom-in" 
-    data-aos-delay="400">
+    data-aos="zoom-in">
   </video>
-  
-  <p data-aos="fade-up" data-aos-delay="600">
-    Orang kuat itu bukan yang gak pernah jatuh. Tapi yang tiap kali jatuh, dia bangun lagi 
-    dengan kepala lebih tegak dan hati yang lebih keras.
-  </p>
-  
-  <p class="extra-text" id="text1">
-    Jangan bandingin progress lu sama orang lain. Lu punya timeline sendiri. 
-    Pelan gak masalah, yang penting gak berhenti.
-  </p>
-  
-  <p class="extra-text" id="text2">
-    Hari ini mungkin capek banget. Tapi inget, versi lu 6 bulan lagi bakal makasih 
-    banget sama lu yang gak nyerah hari ini. Gue percaya sama lu.
-  </p>
-  
-  <button id="btnLanjut" onclick="lanjut()" data-aos="fade-up" data-aos-delay="800">Pencet Ini</button>
-  <button id="btnWA" style="display:none; background:#25D366; color:#fff;" onclick="window.open('https://wa.me/62895351432524')">
-    Chat Gue
+
+  <div class="typewriter" id="text2"></div>
+  <div class="tap-hint" id="hint2">Ketuk lagi ya</div>
+</div>
+
+<!-- Halaman 3 -->
+<div class="page" id="page3">
+  <h1 data-aos="fade-down">Jujur Aja...</h1>
+  <div class="typewriter" id="text3"></div>
+  <button id="btnWA" onclick="window.open('https://wa.me/62895351432524')">
+    Mau dong 💌
   </button>
 </div>
 
 <script>
-let step = 0;
+let currentPage = 1;
+const totalPages = 3;
+let isTyping = false;
 
-// Init AOS
+const texts = {
+ 1: "Gue gak tau mulai dari mana, tapi tiap kali inget kamu, rasanya hari yang biasa aja jadi sedikit lebih terang. Boleh gak sih gue jujur? Dari dulu gue ngerasa ada yang beda setiap kali ngobrol sama kamu.",
+ 2: "Serius deh, cara kamu ketawa, cara kamu ngomong, semuanya bikin gue betah berlama-lama dengerin kamu. Ada hal tentang kamu yang bikin gue pengen kenal lebih jauh.",
+ 3: "Gue suka sama kamu. Gak sekedar suka ngobrol, tapi suka sama semua tentang kamu. Mau gak kita coba kenalan lebih jauh? Siapa tau kita emang cocok buat saling jaga."
+};
+
 AOS.init({
-  once: true,
-  offset: 50
+  once: false,
+  offset: 50,
+  duration: 600
 });
 
-function playContent() {
-  document.getElementById('start').style.display = 'none';
-  document.getElementById('card').classList.add('show');
+window.onload = () => {
+  typeWriter(1, texts[1], 'text1', () => {
+    document.getElementById('hint1').classList.add('show');
+  });
 }
 
-function lanjut() {
-  step++;
-  if(step === 1) {
-    document.getElementById('text1').classList.add('show');
-    document.getElementById('text1').setAttribute('data-aos', 'fade-up');
-    document.getElementById('btnLanjut').innerText = 'Pencet Lagi';
-    AOS.refresh();
-  }
-  if(step === 2) {
-    document.getElementById('text2').classList.add('show');
-    document.getElementById('text2').setAttribute('data-aos', 'fade-up');
-    document.getElementById('btnLanjut').style.display = 'none';
-    document.getElementById('btnWA').style.display = 'inline-block';
-    AOS.refresh();
-  }
+function typeWriter(page, text, elementId, callback) {
+  if (isTyping) return;
+  isTyping = true;
+
+  let i = 0;
+  const element = document.getElementById(elementId);
+  element.innerHTML = '<span class="cursor"></span>';
+
+  const typing = setInterval(() => {
+    if (i < text.length) {
+      element.innerHTML = text.substring(0, i+1) + '<span class="cursor"></span>';
+      i++;
+    } else {
+      clearInterval(typing);
+      element.innerHTML = text;
+      isTyping = false;
+      if (callback) callback();
+    }
+  }, 45);
+}
+
+function nextPage(page) {
+  if (isTyping || page >= totalPages) return;
+
+  document.getElementById(`page${page}`).classList.remove('active');
+
+  currentPage = page + 1;
+  document.getElementById(`page${currentPage}`).classList.add('active');
+
+  AOS.refresh();
+
+  setTimeout(() => {
+    typeWriter(currentPage, texts[currentPage], `text${currentPage}`, () => {
+      if (currentPage < totalPages) {
+        document.getElementById(`hint${currentPage}`).classList.add('show');
+      } else {
+        setTimeout(() => {
+          document.getElementById('btnWA').classList.add('show');
+        }, 500);
+      }
+    });
+  }, 300);
 }
 </script>
 
