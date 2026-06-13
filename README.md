@@ -1,2 +1,0 @@
-untuk kamu
-spesial
